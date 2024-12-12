@@ -28,10 +28,8 @@ steps:
       arguments: '-o $(Build.ArtifactStagingDirectory)/Output'
       zipAfterPublish: true
       modifyOutputPath: true
-      
+
    - task: PublishPipelineArtifact@1
      artifactName: 'Publish pipeline artifact'
      inputs:
       targetPath: '$(Build.ArtifactStagingDirectory)/Output'
-
-
