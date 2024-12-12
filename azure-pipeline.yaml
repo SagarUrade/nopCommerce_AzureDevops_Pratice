@@ -3,9 +3,12 @@ pool: Default
 trigger: none
 
 pr:
-  branches:
-    include:
-      - develop
+    - develop
+    
+variables:
+  webproject: 'src/Presentation/Nop.Web/Nop.Web.csproj'
+  testproject: 'src/Tests/Nop.Tests/Nop.Tests.csproj'
+
 
 steps:
   
@@ -16,18 +19,18 @@ steps:
       versionSpec: '9.0.101'  # Specify .NET 9 SDK
       installationPath: $(Agent.ToolsDirectory)/dotnet
 
-  - task: DotNetCoreCLI@2
-    displayName: Build the Task 1
+   - task: DotNetCoreCLI@2
+    displayName: Build the code
     inputs:
       command: 'build'
-      project: 'src/Presentation/Nop.Web/Nop.Web.csproj'
+      projects: $(webproject)
 
   - task: DotNetCoreCLI@2
-    displayName: dotnet publish Task 3
+    displayName: publish nopCommerce
     inputs:
       command: 'publish'
       publishWebProjects: false
-      projects: 'src/Presentation/Nop.Web/Nop.Web.csproj'
+      projects: $(webproject)
       arguments: '-o $(Build.ArtifactStagingDirectory)/Output'
       zipAfterPublish: true
       modifyOutputPath: true
