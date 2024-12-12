@@ -15,8 +15,8 @@ steps:
       project: 'src/Presentation/Nop.Web/Nop.Web.csproj'
 
    - task: DotNetCoreCLI@2
-    displayName: 'Run the test Task 2'
-    inputs:
+     displayName: 'Run the test Task 2'
+     inputs:
       command: 'test'
       project: 'src/Tests/Nop.Tests/Nop.Tests.csproj'
 
