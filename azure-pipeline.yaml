@@ -1,3 +1,4 @@
+#Dotnet
 pool: Default 
 
 trigger: none
@@ -16,7 +17,7 @@ steps:
    - task: DotNetCoreCLI@2
     displayName: 'Run the test Task 2'
     inputs:
-      command: 'build'
+      command: 'test'
       project: 'src/Tests/Nop.Tests/Nop.Tests.csproj'
 
    - task: DotNetCoreCLI@2
@@ -30,6 +31,6 @@ steps:
       modifyOutputPath: true
 
    - task: PublishPipelineArtifact@1
-     artifactName: 'Publish pipeline artifact'
+      displayName: 'Publish pipeline artifact'
      inputs:
       targetPath: '$(Build.ArtifactStagingDirectory)/Output'
