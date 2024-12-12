@@ -4,7 +4,7 @@ trigger: none
 
 pr:
     - develop
-    
+
 variables:
   webproject: 'src/Presentation/Nop.Web/Nop.Web.csproj'
   testproject: 'src/Tests/Nop.Tests/Nop.Tests.csproj'
@@ -19,7 +19,7 @@ steps:
       versionSpec: '9.0.101'  # Specify .NET 9 SDK
       installationPath: $(Agent.ToolsDirectory)/dotnet
 
-   - task: DotNetCoreCLI@2
+  - task: DotNetCoreCLI@2
     displayName: Build the code
     inputs:
       command: 'build'
