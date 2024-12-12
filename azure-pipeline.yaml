@@ -8,6 +8,14 @@ pr:
       - develop
 
 steps:
+  
+  - task: UseDotNet@2
+    displayName: 'Install .NET 9 SDK'
+    inputs:
+      packageType: 'sdk'
+      versionSpec: '9.0.101'  # Specify .NET 9 SDK
+      installationPath: $(Agent.ToolsDirectory)/dotnet
+
   - task: DotNetCoreCLI@2
     displayName: 'Build the Task 1'
     inputs:
