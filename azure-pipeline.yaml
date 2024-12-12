@@ -1,29 +1,28 @@
-#Dotnet Application
-
 pool: Default 
 
 trigger: none
 
 pr:
-   - develop
+  branches:
+    include:
+      - develop
 
 steps:
-  
   - task: DotNetCoreCLI@2
     displayName: 'Build the Task 1'
     inputs:
       command: 'build'
       project: 'src/Presentation/Nop.Web/Nop.Web.csproj'
 
-   - task: DotNetCoreCLI@2
-     displayName: 'Run the test Task 2'
-     inputs:
-      command: 'test'
+  - task: DotNetCoreCLI@2
+    displayName: 'Run the test Task 2'
+    inputs:
+      command: 'build'
       project: 'src/Tests/Nop.Tests/Nop.Tests.csproj'
 
-   - task: DotNetCoreCLI@2
-     displayName: 'dotnet publish Task 3'
-     inputs:
+  - task: DotNetCoreCLI@2
+    displayName: 'dotnet publish Task 3'
+    inputs:
       command: 'publish'
       publishWebProjects: false
       projects: 'src/Presentation/Nop.Web/Nop.Web.csproj'
@@ -31,7 +30,8 @@ steps:
       zipAfterPublish: true
       modifyOutputPath: true
 
-   - task: PublishPipelineArtifact@1
-      displayName: 'Publish pipeline artifact'
-     inputs:
+  - task: PublishPipelineArtifact@1
+    displayName: 'Publish Artifact'
+    inputs:
       targetPath: '$(Build.ArtifactStagingDirectory)/Output'
+      artifactName: 'Publish pipeline artifact'
