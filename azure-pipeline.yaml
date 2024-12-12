@@ -1,0 +1,37 @@
+pool: Default 
+
+trigger: none
+
+pr:
+   - develop
+
+steps:
+  
+  - task: DotNetCoreCLI@2
+    displayName: 'Build the Task 1'
+    inputs:
+      command: 'build'
+      project: 'src/Presentation/Nop.Web/Nop.Web.csproj'
+
+   - task: DotNetCoreCLI@2
+    displayName: 'Run the test Task 2'
+    inputs:
+      command: 'build'
+      project: 'src/Tests/Nop.Tests/Nop.Tests.csproj'
+
+   - task: DotNetCoreCLI@2
+     displayName: 'dotnet publish Task 3'
+     inputs:
+      command: 'publish'
+      publishWebProjects: false
+      projects: 'src/Presentation/Nop.Web/Nop.Web.csproj'
+      arguments: '-o $(Build.ArtifactStagingDirectory)/Output'
+      zipAfterPublish: true
+      modifyOutputPath: true
+      
+   - task: PublishPipelineArtifact@1
+     artifactName: 'Publish pipeline artifact'
+     inputs:
+      targetPath: '$(Build.ArtifactStagingDirectory)/Output'
+
+
