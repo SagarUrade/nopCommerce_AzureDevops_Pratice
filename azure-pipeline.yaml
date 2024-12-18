@@ -13,8 +13,7 @@ parameters:
     values:
       - Build
       - Test
-     
-
+    
 variables:
   webproject: 'src/Presentation/Nop.Web/Nop.Web.csproj'
   testproject: 'src/Tests/Nop.Tests/Nop.Tests.csproj'
