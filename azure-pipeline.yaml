@@ -5,15 +5,6 @@ trigger: none
 pr:
     - develop
 
-parameters:
-  - name: image
-    displayName: Pool Image
-    type: string
-    default: none
-    values:
-      - Build
-      - Test
-    
 variables:
   webproject: 'src/Presentation/Nop.Web/Nop.Web.csproj'
   testproject: 'src/Tests/Nop.Tests/Nop.Tests.csproj'
