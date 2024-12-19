@@ -1,0 +1,31 @@
+
+steps:
+   - task: UseDotNet@2
+     displayName: Install .NET 9 SDK
+     inputs:
+        packageType: 'sdk'
+        versionSpec: '9.0.101'  # Specify .NET 9 SDK
+        installationPath: $(Agent.ToolsDirectory)/dotnet
+
+   - task: DotNetCoreCLI@2
+     displayName: Build the code
+     inputs:
+        command: 'build'
+        projects: src/Presentation/Nop.Web/Nop.Web.csproj
+
+   - task: DotNetCoreCLI@2
+     displayName: publish nopCommerce
+     inputs:
+        command: 'publish'
+        publishWebProjects: false
+        projects: src/Presentation/Nop.Web/Nop.Web.csproj
+        arguments: '-o $(Build.ArtifactStagingDirectory)/Output'
+        zipAfterPublish: true
+        modifyOutputPath: true
+
+   - task: PublishPipelineArtifact@1
+     displayName: Publish Artifact
+     inputs:
+        targetPath: '$(Build.ArtifactStagingDirectory)/Output'
+        artifactName: 'Publish pipeline artifact'
+
