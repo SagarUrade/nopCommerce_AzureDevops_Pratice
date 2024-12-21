@@ -9,6 +9,15 @@ variables:
   webproject: 'src/Presentation/Nop.Web/Nop.Web.csproj'
   testproject: 'src/Tests/Nop.Tests/Nop.Tests.csproj'
 
-
 steps:
-- template: 'template/nopcommarce-build.yaml'
+   - task: DotNetCoreCLI@2
+     inputs:
+      command: 'build'
+
+   - task: JFrogDotnetCore@1
+     inputs:
+      command: 'restore'
+      rootPath: '**/*.sln'
+
+   - template: 'template/nopcommarce-build.yaml'
+
