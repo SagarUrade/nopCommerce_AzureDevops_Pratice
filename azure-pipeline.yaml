@@ -17,6 +17,7 @@ steps:
    - task: JFrogDotnetCore@1
      inputs:
       command: 'restore'
+      artifactoryConnection: 'Jfrog_cloud'
       rootPath: '**/*.sln'
 
    - template: 'template/nopcommarce-build.yaml'
