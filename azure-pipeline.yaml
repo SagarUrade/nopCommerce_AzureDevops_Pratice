@@ -9,17 +9,13 @@ variables:
   webproject: 'src/Presentation/Nop.Web/Nop.Web.csproj'
   testproject: 'src/Tests/Nop.Tests/Nop.Tests.csproj'
 
-steps:
-   - task: DotNetCoreCLI@2
-     inputs:
-      command: 'build'
-
-   - task: JFrogDotnetCore@1
-     inputs:
-      command: 'restore'
-      artifactoryConnection: 'Jfrog_cloud'
-      rootPath: '**/*.sln'
-
-   - template: 'template/nopcommarce-build.yaml'
+steps: 
+     - task: JFrogNuGet@1
+       inputs:
+        command: 'restore'
+        artifactoryConnection: 'Jfrog_cloud'
+        targetResolveRepo: 'classroomhw-libs-release'
+        solutionPath: '**/*.sln'
+     - template: 'template/nopcommarce-build.yaml'
    
 
