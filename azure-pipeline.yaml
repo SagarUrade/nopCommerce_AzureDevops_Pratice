@@ -1,5 +1,6 @@
 pool: Default 
 
+
 trigger: none
 
 pr:
@@ -16,6 +17,22 @@ steps:
          buildName: '$(Build.DefinitionName)'
          buildNumber: '$(Build.BuildNumber)'
          projectKey: 'nopcommarce123'
+         
+     - task: JFrogGenericArtifacts@1
+       inputs:
+         command: 'Upload'
+         connection: 'Jfrog_dotnet_project'
+         specSource: 'taskConfiguration'
+         fileSpec: |
+           {
+             "files": [
+               {
+                 "pattern": ".war",
+                 "target": "artifactory-build-info"
+               }
+             ]
+           }
+         failNoOp: true
      - template: 'template/nopcommarce-build.yaml'
    
 
