@@ -1,0 +1,22 @@
+pool: Default 
+
+
+trigger: none
+
+pr:
+    - develop
+
+variables:
+  webproject: 'src/Presentation/Nop.Web/Nop.Web.csproj'
+  testproject: 'src/Tests/Nop.Tests/Nop.Tests.csproj'
+
+steps: 
+     - task: JFrogPublishBuildInfo@1
+       inputs:
+         artifactoryConnection: 'Jfrog_dotnet_project'
+         buildName: '$(Build.DefinitionName)'
+         buildNumber: '$(Build.BuildNumber)'
+         projectKey: 'nopcommarce123'
+         
+     - template: 'template/nopcommarce-build.yaml'
+   
